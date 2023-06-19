@@ -4,11 +4,11 @@ body, html {
   height: 100%;
   margin: 0;
   overflow: hidden;
-  background-image: url(./9879938-pixel-art-or-et-minerais-recevant-mine-avec-chariot-fond-8bit-vectoriel.png);
+  background-image: url(./images/background.png);
 }
 #game-container {
   width: 100%;
-  height: 91%;
+  height: 90%;
   position: relative;
   cursor: none;
 }
@@ -18,24 +18,47 @@ body, html {
   background-color: rgba(0, 0, 0, 0.6)
 }
 
+.boostedPlayer{
+  width: 100px;
+  height: 100px;
+}
+
 #player {
-  width: 300px;
   height: 300px;
-  /* background-color: blue; */
-  border-radius: 50%;
+  /* border-radius: 50%; */
   position: absolute;
   bottom: 0;
 }
 
-#coin {
+#boostForPlayer {
+  z-index: 2;
   width: 80px;
   height: 80px;
-  /* background-color: yellow; */
   border-radius: 50%;
   position: absolute;
   top: 0;
 }
+
+#newLife {
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
+
+#coin {
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
+
 #bomb {
+  z-index: 2;
   width: 90px;
   height: 90px;
   display: none;
@@ -55,6 +78,15 @@ body, html {
   font-size: 1.6rem;
   text-align: center;
   font-family: 'Press Start 2P', sans-serif;
+}
+
+#bestScore{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #efefef;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 1.6rem;
 }
 
 #gameOver{
@@ -82,6 +114,7 @@ a{
 }
 
 #life{
+  z-index: 1;
   position: absolute;
   top: 0;
   right: 0;
@@ -113,105 +146,64 @@ a{
   }
 }
 
-.button-49,
-.button-49:after {
-  margin: 8% 5%;
-  text-align: center;
-  width: 150px;
-  height: 76px;
-  line-height: 78px;
-  font-size: 20px;
-  font-family: 'Bebas Neue', sans-serif;
-  background: linear-gradient(45deg, transparent 5%, #222 5%);
-  border: 0;
-  color: #fff;
-  letter-spacing: 3px;
-  box-shadow: 6px 0px 0px #efefef;
-  outline: transparent;
+#audioOption{
+  position: absolute;
+  bottom: 0;
+  right: 50px;
+}
+
+#audioIcon{
+  width: 80px;
+}
+
+.button-53 {
+  background-color: var(--light-shadow);
+  border: 0 solid #E5E7EB;
+  box-sizing: border-box;
+  color: #efefef;
+  display: flex;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  justify-content: center;
+  line-height: 1.75rem;
+  margin: 40px 25px;
   position: relative;
+  text-align: center;
+  text-decoration: none #000000 solid;
+  text-decoration-thickness: auto;
+  width: 25%;
+  position: relative;
+  cursor: pointer;
+  transform: rotate(-2deg);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
 
-.button-49:after {
-  --slice-0: inset(50% 50% 50% 50%);
-  --slice-1: inset(80% -6px 0 0);
-  --slice-2: inset(50% -6px 30% 0);
-  --slice-3: inset(10% -6px 85% 0);
-  --slice-4: inset(40% -6px 43% 0);
-  --slice-5: inset(80% -6px 5% 0);
-  
-  content: 'HELP';
-  display: block;
+.button-53:focus {
+  outline: 0;
+}
+
+.button-53:after {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 3%, #efefef 3%, #efefef 5%, #222 5%);
-  text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #efefef;
-  clip-path: var(--slice-0);
+  border: 1px solid #000000;
+  bottom: 4px;
+  left: 4px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
 }
 
-.button-49:hover:after {
-  animation: 1s glitch;
-  animation-timing-function: steps(2, end);
-}
-
-@keyframes glitch {
-  0% {
-    clip-path: var(--slice-1);
-    transform: translate(-20px, -10px);
-  }
-  10% {
-    clip-path: var(--slice-3);
-    transform: translate(10px, 10px);
-  }
-  20% {
-    clip-path: var(--slice-1);
-    transform: translate(-10px, 10px);
-  }
-  30% {
-    clip-path: var(--slice-3);
-    transform: translate(0px, 5px);
-  }
-  40% {
-    clip-path: var(--slice-2);
-    transform: translate(-5px, 0px);
-  }
-  50% {
-    clip-path: var(--slice-3);
-    transform: translate(5px, 0px);
-  }
-  60% {
-    clip-path: var(--slice-4);
-    transform: translate(5px, 10px);
-  }
-  70% {
-    clip-path: var(--slice-2);
-    transform: translate(-10px, 10px);
-  }
-  80% {
-    clip-path: var(--slice-5);
-    transform: translate(20px, -10px);
-  }
-  90% {
-    clip-path: var(--slice-1);
-    transform: translate(-10px, 0px);
-  }
-  100% {
-    clip-path: var(--slice-1);
-    transform: translate(0);
-  }
+.button-53:hover:after {
+  bottom: 2px;
+  left: 2px;
 }
 
 @media (min-width: 768px) {
-  .button-49,
-  .button-49:after {
-    width: 200px;
-    height: 86px;
-    line-height: 88px;
+  .button-53 {
+    padding: .75rem 3rem;
+    font-size: 1.25rem;
   }
 }
 
