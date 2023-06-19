@@ -59,15 +59,15 @@ if (!localStorage.getItem('Audio')) {
 let coinAudio = false;
 let bombAudio = false;
 let lifeAudio = false;
-let backgroundAudio = false;
+// let backgroundAudio = false;
 if (localStorage.getItem('Audio') == 'true') {
   coinAudio = new Audio("./asset/audio/coin_audio.wav");
   bombAudio = new Audio("./asset/audio/bomb-hit.wav");
   lifeAudio = new Audio("./asset/audio/up.mp3");
-  backgroundAudio = new Audio("./asset/audio/background_music.mp3");
-  if (backgroundAudio.stop()) {
-    backgroundAudio.play();
-  }
+  // backgroundAudio = new Audio("./asset/audio/background_music.mp3");
+  // if (backgroundAudio.stop()) {
+  //   backgroundAudio.play();
+  // }
 }
 
 // Première apparition aléatoire
