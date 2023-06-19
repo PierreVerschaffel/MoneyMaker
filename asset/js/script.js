@@ -59,11 +59,15 @@ if (!localStorage.getItem('Audio')) {
 let coinAudio = false;
 let bombAudio = false;
 let lifeAudio = false;
+let bonusAudio = false;
+let antiBonusAudio = false;
 // let backgroundAudio = false;
 if (localStorage.getItem('Audio') == 'true') {
   coinAudio = new Audio("./asset/audio/coin_audio.wav");
   bombAudio = new Audio("./asset/audio/bomb-hit.wav");
   lifeAudio = new Audio("./asset/audio/up.mp3");
+  bonusAudio = new Audio("./asset/audio/bonus.mp3");
+  antiBonusAudio = new Audio("./asset/audio/antiBonus.mp3");
   // backgroundAudio = new Audio("./asset/audio/background_music.mp3");
   // if (backgroundAudio.stop()) {
   //   backgroundAudio.play();
@@ -175,10 +179,10 @@ function checkCollisionWithBonus() {
     playerRect.right > bonusRect.left &&
     playerRect.top < bonusRect.bottom &&
     playerRect.bottom > bonusRect.top) {
-    // if (bonusAudio) {
-    //   bonusAudio.currentTime = 0;
-    //   bonusAudio.play();
-    // }
+    if (bonusAudio) {
+      bonusAudio.currentTime = 0;
+      bonusAudio.play();
+    }
     player.style.height= '100px'
     setTimeout(() => {
       player.style.height= '300px';
@@ -197,10 +201,10 @@ function checkCollisionWithAntiBonus() {
     playerRect.right > antiBonusRect.left &&
     playerRect.top < antiBonusRect.bottom &&
     playerRect.bottom > antiBonusRect.top) {
-    // if (antiBonusAudio) {
-    //   antiBonusAudio.currentTime = 0;
-    //   antiBonusAudio.play();
-    // }
+    if (antiBonusAudio) {
+      antiBonusAudio.currentTime = 0;
+      antiBonusAudio.play();
+    }
     player.style.height= '400px'
     setTimeout(() => {
       player.style.height= '300px';
@@ -295,13 +299,16 @@ function startGame() {
       checkCollisionWithBomb();
       bomb.style.display = "inline"
     }
-    if (score >= 25) {
+    if (score >= 22) {
       moveMoreBombs();
       checkCollisionWithMoreBomb();
       moreBomb.style.display = "inline"
     }
     checkCollision();
     checkLife();
+    if(score + 10 == totalCoin){
+      gameOver();
+    }
   }, 50);
   startCoinInterval();
   startLifeInterval();
@@ -310,6 +317,7 @@ function startGame() {
 }
 
 function gameOver() {
+
   if (localStorage.getItem('bestScore') < score) {
     localStorage.setItem('bestScore', score);
   }

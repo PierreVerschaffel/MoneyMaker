@@ -19,9 +19,10 @@ body, html {
 }
 
 #background{
+  /* background-color: rgba(0, 0, 0, 0.6); */
   background-image: url(./images/background.png);
+  opacity: 0.8;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6)
 }
 
 #player {
@@ -114,7 +115,7 @@ body, html {
   text-align: center;
   color: #efefef;
   font-size: 2.8rem;
-  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black
+  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
 }
 
 #gameOverSection{
@@ -140,6 +141,7 @@ a{
   top: 0;
   right: 0;
   width: 20%;
+  cursor: none;
 }
 
 .animatedHit{
@@ -171,6 +173,7 @@ a{
   position: absolute;
   bottom: 0;
   right: 50px;
+  cursor: pointer;
 }
 
 #audioIcon{
