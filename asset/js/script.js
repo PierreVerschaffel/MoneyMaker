@@ -7,6 +7,7 @@ let lifeDisplay = document.getElementById('life');
 let scoreElement = document.getElementById('score');
 let bonus = document.getElementById('bonus');
 let antiBonus = document.getElementById('antiBonus');
+let stalagtite = document.querySelectorAll('.stalagtite');
 
 // Score & Vies
 let score = 0;
@@ -33,6 +34,13 @@ let moreBombSpeed = 30;
 let moreBombIntervalTime = 2000;
 let moreBombAcceleration = 5;
 let moreBombAccelerationInterval = 5;
+
+// Variables bombes
+let stalagtiteInterval;
+let stalagtiteSpeed = 5;
+let stalagtiteIntervalTime = 5000;
+let stalagtiteAcceleration = 5;
+let stalagtiteAccelerationInterval = 5;
 
 // Variables vies
 let lifeInterval;
@@ -81,6 +89,12 @@ bomb.style.left = (Math.random() * (gameWidth - 40)) + 'px';
 moreBomb.style.left = (Math.random() * (gameWidth - 40)) + 'px';
 bonus.style.left = (Math.random() * (gameWidth - 40)) + 'px';
 antiBonus.style.left = (Math.random() * (gameWidth - 40)) + 'px';
+firstStalagtiteToSpawn = (Math.random() * (gameWidth - 40)) ;
+for (let i = 0; i < stalagtite.length; i++) {
+  firstStalagtiteToSpawn += 50;
+  stalagtite[i].style.left = firstStalagtiteToSpawn + 'px'
+  stalagtite[i].style.display = 'none'
+}
 life.style.display = 'none'
 bonus.style.display = 'none'
 antiBonus.style.display = 'none'
@@ -246,6 +260,37 @@ function checkCollisionWithBomb() {
   }
 }
 
+function checkCollisionWithStalagtite() {
+  let playerRect = player.getBoundingClientRect();
+  for (let j = 0; j < stalagtite.length; j++) {
+    let stalagtiteRect = stalagtite[j].getBoundingClientRect();
+
+    if (playerRect.left < stalagtiteRect.right &&
+      playerRect.right > stalagtiteRect.left &&
+      playerRect.top < stalagtiteRect.bottom &&
+      playerRect.bottom > stalagtiteRect.top) {
+        firstStalagtiteToSpawn = (Math.random() * (gameWidth - 40)) ;
+        topStalagtiteToSpawn = 0;
+        for (let i = 0; i < stalagtite.length; i++) {
+          firstStalagtiteToSpawn += 50;
+          topStalagtiteToSpawn += 20;
+          stalagtite[i].style.top = topStalagtiteToSpawn + 'px';
+          stalagtite[i].style.left = firstStalagtiteToSpawn + 'px'
+        }
+      lifeCount -= 1;
+      // if (stalagtiteAudio) {
+      //   stalagtiteAudio.currentTime = 0;
+      //   stalagtiteAudio.volume = 0.2;
+      //   stalagtiteAudio.play();
+      // }
+      player.classList.add('animatedHit')
+      setTimeout(() => {
+        player.classList.remove('animatedHit');
+      }, 1000);
+    }
+  }
+}
+
 function checkCollisionWithMoreBomb() {
   let playerRect = player.getBoundingClientRect();
   let moreBombRect = moreBomb.getBoundingClientRect();
@@ -291,6 +336,8 @@ function startGame() {
     moveLifes();
     moveBonus();
     moveAntiBonus();
+
+
     checkCollisionWithBonus();
     checkCollisionWithAntiBonus();
     checkCollisionWithLife();
@@ -304,15 +351,23 @@ function startGame() {
       checkCollisionWithMoreBomb();
       moreBomb.style.display = "inline"
     }
+    if (score >= 40) {
+      moveStalagtite();
+      checkCollisionWithStalagtite();
+      for (let i = 0; i < stalagtite.length; i++) {
+        stalagtite[i].style.display= 'inline';
+      }
+    }
     checkCollision();
     checkLife();
-    if(score + 10 == totalCoin){
-      gameOver();
-    }
+    // if(score + 10 == totalCoin){
+    //   gameOver();
+    // }
   }, 50);
   startCoinInterval();
   startLifeInterval();
   startBonusInterval();
+  // startStalagtiteInterval();
   startAntiBonusInterval();
 }
 
@@ -382,6 +437,12 @@ function startMoreBombInterval() {
   moreBombInterval = setInterval(function () {
     moveMoreBombs();
   }, moreBombIntervalTime);
+}
+
+function startStalagtiteInterval() {
+  stalagtiteInterval = setInterval(function () {
+    moveStalagtite();
+  }, stalagtiteIntervalTime);
 }
 
 // __________________________________________________________
@@ -455,6 +516,30 @@ function moveMoreBombs() {
     moreBomb.style.left = (Math.random() * (gameWidth - 40)) + 'px';
   } else {
     moreBomb.style.top = (topPosition + moreBombSpeed) + 'px';
+  }
+}
+document.addEventListener('mousemove', movePlayer);
+
+function moveStalagtite() {
+  for (let i = 0; i < stalagtite.length; i++) {
+    stalagtite[i].style.display= 'inline';
+  }
+  for (let i = 0; i < stalagtite.length; i++) {
+    let topPosition= parseInt(window.getComputedStyle(stalagtite[i]).getPropertyValue('top'));
+    if (topPosition >= gameHeight - 40) {
+      firstStalagtiteToSpawn = (Math.random() * (gameWidth - 40))
+      topStalagtiteToSpawn = 0;
+      for (let j = 0; j < stalagtite.length; j++) {
+        firstStalagtiteToSpawn += 50;
+        topStalagtiteToSpawn += 20;
+        stalagtite[j].style.top = topStalagtiteToSpawn + 'px';
+        stalagtite[j].style.left = firstStalagtiteToSpawn + 'px';
+      }
+    } else {
+      for (let i = 0; i < stalagtite.length; i++) {
+        stalagtite[i].style.top = (topPosition + stalagtiteSpeed) + 'px';
+      }
+    }
   }
 }
 document.addEventListener('mousemove', movePlayer);
