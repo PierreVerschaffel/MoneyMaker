@@ -412,7 +412,7 @@ function startAntiBonusInterval() {
     antiBonus.style.top = '0px';
     antiBonus.style.left = (Math.random() * (gameWidth - 40)) + 'px';
     antiBonus.style.display = 'inline';
-  }, getRandomInterval(40000, 50000));
+  }, getRandomInterval(50000, 60000));
 }
 
 function getRandomInterval(min, max) {
