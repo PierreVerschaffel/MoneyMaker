@@ -99,7 +99,6 @@ life.style.display = 'none'
 bonus.style.display = 'none'
 antiBonus.style.display = 'none'
 
-
 // __________________________________________________________
 // __________________Déplacement du personnage_______________
 // __________________________________________________________
@@ -207,6 +206,7 @@ function checkCollisionWithBonus() {
   }
 }
 
+// Colision personnage avec antiBonus
 function checkCollisionWithAntiBonus() {
   let playerRect = player.getBoundingClientRect();
   let antiBonusRect = antiBonus.getBoundingClientRect();
@@ -260,6 +260,7 @@ function checkCollisionWithBomb() {
   }
 }
 
+// Colision personnage avec stalagtite
 function checkCollisionWithStalagtite() {
   let playerRect = player.getBoundingClientRect();
   for (let j = 0; j < stalagtite.length; j++) {
@@ -291,6 +292,7 @@ function checkCollisionWithStalagtite() {
   }
 }
 
+// Colision personnage avec bombe
 function checkCollisionWithMoreBomb() {
   let playerRect = player.getBoundingClientRect();
   let moreBombRect = moreBomb.getBoundingClientRect();
@@ -439,6 +441,7 @@ function startMoreBombInterval() {
   }, moreBombIntervalTime);
 }
 
+// Timer stalagtites
 function startStalagtiteInterval() {
   stalagtiteInterval = setInterval(function () {
     moveStalagtite();
@@ -509,6 +512,7 @@ function moveBombs() {
   }
 }
 
+// Mouvement des bombes
 function moveMoreBombs() {
   let topPosition = parseInt(window.getComputedStyle(moreBomb).getPropertyValue('top'));
   if (topPosition >= gameHeight - 40) {
@@ -518,8 +522,8 @@ function moveMoreBombs() {
     moreBomb.style.top = (topPosition + moreBombSpeed) + 'px';
   }
 }
-document.addEventListener('mousemove', movePlayer);
 
+// Mouvement des stalagtites
 function moveStalagtite() {
   for (let i = 0; i < stalagtite.length; i++) {
     stalagtite[i].style.display= 'inline';
@@ -558,8 +562,6 @@ function checkLife() {
     gameOver();
   }
 }
-
-// 
 
 if (!localStorage.getItem('bestScore')) {
   localStorage.setItem('bestScore', score);
