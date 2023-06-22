@@ -1,28 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Money Maker</title>
-    <link rel="stylesheet" type="text/css" href="./asset/style.css">
+    <title>Instruction</title>
+    <link rel="stylesheet" href="./asset/style.css">
 </head>
-<body>
-    <div id="score">Score : 0</div>
-    <div id="game-container">
-        <img id="player" src="./asset/images/character.gif">
-        <img id="coin" src="./asset/images/coin.gif">
-        <img id="bomb" src="./asset/images/bomb.png">
-        <img id="moreBomb" src="./asset/images/bomb.png">
-        <img id="newLife" src="./asset/images/heart.gif">
-        <img id="bonus" src="./asset/images/bonus.gif">
-        <img id="antiBonus" src="./asset/images/antiBonus.gif">
-        <img class="stalagtite" src="./asset/images/stalagtite.png" alt="">
-        <img class="stalagtite" src="./asset/images/stalagtite.png" alt="">
-        <img class="stalagtite" src="./asset/images/stalagtite.png" alt="">
-        <img class="stalagtite" src="./asset/images/stalagtite.png" alt="">
-    </div>
-    <img id="life" src="">
 
+<body>
+    <main id="background">
+        <div id="menu" class="pixel-effect">
+            <h1>instructions</h1>
+            <div>
+                <img src="./asset/images/coin.gif" alt="" class="instructionIcon">
+                <p>Augmentez votre score en ramassant les pièces </p>
+                <img src="./asset/images/coin.gif" alt="" class="instructionIcon">
+            </div>
+            <div>
+                <img src="./asset/images/bomb.gif" alt="" class="instructionIcon">
+                <p>Vous perdez de la vie si vous vous faites toucher par une bombe</p>
+                <img src="./asset/images/bomb.gif" alt="" class="instructionIcon">
+            </div>
+            <div>
+                <img src="./asset/images/bonus.gif" alt="" class="instructionIcon">
+                <p>Les cadeaux vert vous rendent plus petit un court instant</p>
+                <img src="./asset/images/bonus.gif" alt="" class="instructionIcon">
+            </div>
+            <div>
+                <img src="./asset/images/antiBonus.gif" alt="" class="instructionIcon">
+                <p>Les cadeaux rouge vous font grossir pendant un court instant</p>
+                <img src="./asset/images/antiBonus.gif" alt="" class="instructionIcon">
+            </div>
+            <div>
+                <img src="./asset/images/heart.gif" alt="" class="instructionIcon">
+                <p>Vous pouvez récupérer de la vie en ramassant les coeurs </p>
+                <img src="./asset/images/heart.gif" alt="" class="instructionIcon">
+            </div>
+            <div>
+                <img src="./asset/images/curseur.png" alt="" class="instructionIcon">
+                <p>Utilisez votre souris pour vous déplacer</p>
+                <img src="./asset/images/curseur.png" alt="" class="instructionIcon">
+            </div>
+            <div id="difficultyButton">
+                <a href="./pages/game.html"  id="easyBtn" class="button-53" role="button">Facile</a>
+                <a href="./pages/game.html"  id="mediumBtn" class="button-53" role="button">Intermédiare</a>
+                <a href="./pages/game.html"  id="hardBtn" class="button-53" role="button">Difficile</a>
+            </div>
+            <div id="audioOptionMenu"><img src="" alt="" id="audioIcon"></div>
+        </div>
+    </main>
 </body>
+<script src="./asset/js/Instruction.js"></script>
+
 </html>
-<script src="./asset/js/script.js" defer></script>

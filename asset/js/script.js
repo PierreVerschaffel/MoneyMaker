@@ -3,7 +3,9 @@ let coin = document.getElementById('coin');
 let bomb = document.getElementById('bomb');
 let moreBomb = document.getElementById('moreBomb');
 let life = document.getElementById('newLife');
-let lifeDisplay = document.getElementById('life');
+let fullLife = document.getElementById('fullLife');
+let halfLife = document.getElementById('halfLife');
+let lastLife = document.getElementById('lastLife')
 let scoreElement = document.getElementById('score');
 let bonus = document.getElementById('bonus');
 let antiBonus = document.getElementById('antiBonus');
@@ -59,6 +61,9 @@ let gameInterval;
 let gameWidth = document.getElementById('game-container').offsetWidth;
 let gameHeight = document.getElementById('game-container').offsetHeight;
 
+// Difficulté 
+let difficulty=localStorage.getItem('difficulty');
+
 // Audio
 if (!localStorage.getItem('Audio')) {
   localStorage.setItem('Audio', 'true');
@@ -71,11 +76,11 @@ let bonusAudio = false;
 let antiBonusAudio = false;
 // let backgroundAudio = false;
 if (localStorage.getItem('Audio') == 'true') {
-  coinAudio = new Audio("./asset/audio/coin_audio.wav");
-  bombAudio = new Audio("./asset/audio/bomb-hit.wav");
-  lifeAudio = new Audio("./asset/audio/up.mp3");
-  bonusAudio = new Audio("./asset/audio/bonus.mp3");
-  antiBonusAudio = new Audio("./asset/audio/antiBonus.mp3");
+  coinAudio = new Audio("../asset/audio/coin_audio.wav");
+  bombAudio = new Audio("../asset/audio/bomb-hit.wav");
+  lifeAudio = new Audio("../asset/audio/up.mp3");
+  bonusAudio = new Audio("../asset/audio/bonus.mp3");
+  antiBonusAudio = new Audio("../asset/audio/antiBonus.mp3");
   // backgroundAudio = new Audio("./asset/audio/background_music.mp3");
   // if (backgroundAudio.stop()) {
   //   backgroundAudio.play();
@@ -98,7 +103,7 @@ for (let i = 0; i < stalagtite.length; i++) {
 life.style.display = 'none'
 bonus.style.display = 'none'
 antiBonus.style.display = 'none'
-
+coin.style.display = 'inline'
 // __________________________________________________________
 // __________________Déplacement du personnage_______________
 // __________________________________________________________
@@ -335,41 +340,47 @@ function updateScore() {
 function startGame() {
   gameInterval = setInterval(function () {
     moveCoins();
+    checkCollision();
+    
     moveLifes();
-    moveBonus();
-    moveAntiBonus();
-
-
-    checkCollisionWithBonus();
-    checkCollisionWithAntiBonus();
     checkCollisionWithLife();
+    
+    moveBonus();
+    checkCollisionWithBonus();
+    if(difficulty=="medium" || difficulty=="hard"){
+      moveAntiBonus();
+      checkCollisionWithAntiBonus();
+    }
+
     if (score >= 5) {
       moveBombs();
       checkCollisionWithBomb();
       bomb.style.display = "inline"
     }
-    if (score >= 22) {
-      moveMoreBombs();
-      checkCollisionWithMoreBomb();
-      moreBomb.style.display = "inline"
-    }
-    if (score >= 40) {
-      moveStalagtite();
-      checkCollisionWithStalagtite();
-      for (let i = 0; i < stalagtite.length; i++) {
-        stalagtite[i].style.display= 'inline';
+
+    if(difficulty=="medium" || difficulty=="hard"){
+      if (score >= 22) {
+        moveMoreBombs();
+        checkCollisionWithMoreBomb();
+        moreBomb.style.display = "inline"
       }
     }
-    checkCollision();
+
+    if(difficulty=="hard"){
+      if (score >= 40) {
+        moveStalagtite();
+        checkCollisionWithStalagtite();
+        for (let i = 0; i < stalagtite.length; i++) {
+          stalagtite[i].style.display= 'inline';
+        }
+      }
+    }
     checkLife();
-    // if(score + 10 == totalCoin){
-    //   gameOver();
-    // }
   }, 50);
+  
   startCoinInterval();
   startLifeInterval();
   startBonusInterval();
-  // startStalagtiteInterval();
   startAntiBonusInterval();
 }
 
@@ -381,7 +392,7 @@ function gameOver() {
   clearInterval(gameInterval);
   clearInterval(bombInterval);
   clearInterval(coinInterval);
-  document.location.href = "./pages/gameover.html";
+  document.location.href = "./gameover.html";
 }
 
 // __________________________________________________________
@@ -411,7 +422,9 @@ function startAntiBonusInterval() {
   setInterval(function () {
     antiBonus.style.top = '0px';
     antiBonus.style.left = (Math.random() * (gameWidth - 40)) + 'px';
-    antiBonus.style.display = 'inline';
+    if(difficulty=="medium" || difficulty=="hard"){
+      antiBonus.style.display = 'inline';
+    }
   }, getRandomInterval(50000, 60000));
 }
 
@@ -553,11 +566,17 @@ startGame();
 
 function checkLife() {
   if (lifeCount == 3) {
-    lifeDisplay.src = "./asset/images/FullLife.png";
+    fullLife.style.display='inline';
+    halfLife.style.display='none';
+    lastLife.style.display='none';
   } else if (lifeCount == 2) {
-    lifeDisplay.src = "./asset/images/HalfLife.png";
+    fullLife.style.display='none';
+    halfLife.style.display='inline';
+    lastLife.style.display='none';
   } else if (lifeCount == 1) {
-    lifeDisplay.src = "./asset/images/LastLife.png";
+    fullLife.style.display='none';
+    halfLife.style.display='none';
+    lastLife.style.display='inline';
   } else {
     gameOver();
   }
