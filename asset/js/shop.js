@@ -1,5 +1,10 @@
+let credit
 
-let credit = localStorage.getItem("Bank");
+if(localStorage.getItem('Bank')){
+    credit = localStorage.getItem("Bank");
+}else{
+    credit=0;
+}
 
 // Déclaration de mes buttons d'achat
 
