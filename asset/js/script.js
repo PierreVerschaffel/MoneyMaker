@@ -1,8 +1,22 @@
 let player = document.getElementById('player');
+
+if(localStorage.getItem('skin')=='blue'){
+  player.src="../asset/images/characterBlue.gif";
+}
+
 let coin = document.getElementById('coin');
+
+if(localStorage.getItem('coin')=='blue'){
+  coin.src="../asset/images/blueCoin.gif";
+}
 let bomb = document.getElementById('bomb');
 let moreBomb = document.getElementById('moreBomb');
 let life = document.getElementById('newLife');
+
+if(localStorage.getItem('heart')=='real'){
+  life.src="../asset/images/steak.png";
+}
+
 let fullLife = document.getElementById('fullLife');
 let halfLife = document.getElementById('halfLife');
 let lastLife = document.getElementById('lastLife')
@@ -151,8 +165,13 @@ function checkCollision() {
       coinAudio.currentTime = 0;
       coinAudio.play();
     }
-    score++;
-    totalCoin++;
+    if(localStorage.getItem('multiplier')==='active'){
+      score+=2;
+      totalCoin+=2;
+    }else{
+      score++;
+      totalCoin++;
+    }
     coin.style.top = '0px';
     coin.style.left = (Math.random() * (gameWidth - 40)) + 'px';
     updateScore();
@@ -385,7 +404,8 @@ function startGame() {
 }
 
 function gameOver() {
-
+  localStorage.setItem('money',score);
+  localStorage.setItem('played',"true");
   if (localStorage.getItem('bestScore') < score) {
     localStorage.setItem('bestScore', score);
   }

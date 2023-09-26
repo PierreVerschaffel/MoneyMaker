@@ -1,6 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Press+Start+2P';
 
-body, html {
+body,
+html {
   z-index: -2;
   height: 100vh;
   margin: 0;
@@ -9,6 +10,7 @@ body, html {
   background-image: url(./images/background.gif);
   background-repeat: no-repeat;
   background-size: cover;
+  user-select: none;
 }
 
 #game-container {
@@ -20,10 +22,11 @@ body, html {
   /* margin-bottom: 50px; */
 }
 
-#background{
+#background {
   margin: 0;
   height: 100%;
 }
+
 .pixel-effect {
   border: 3px solid #77571d;
   border-radius: 20px;
@@ -122,7 +125,7 @@ body, html {
   cursor: none;
 }
 
-#bestScore{
+#bestScore {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -131,14 +134,14 @@ body, html {
   font-size: 1.6rem;
 }
 
-#gameOver{
+#gameOver {
   text-align: center;
   color: #efefef;
   font-size: 2.8rem;
   text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
 }
 
-#gameOverSection{
+#gameOverSection {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -148,15 +151,15 @@ body, html {
 }
 
 
-a{
+a {
   margin-top: 10px;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.life{
+.life {
   z-index: 1;
   position: absolute;
   top: 0;
@@ -165,45 +168,50 @@ a{
   cursor: none;
 }
 
-.lifeDisplay{
+.lifeDisplay {
   display: none;
 }
 
-#copyright{
+#copyright {
   position: absolute;
   bottom: 20px;
   left: 20px;
   color: #222;
-  font-family: 'Press Start 2P',sans-serif;
+  font-family: 'Press Start 2P', sans-serif;
   font-size: 0.9rem;
 }
 
-.animatedHit{
+.animatedHit {
   animation: 1s getHitted;
 }
 
-@keyframes getHitted{
-  0%{
+@keyframes getHitted {
+  0% {
     opacity: 0;
   }
-  20%{
+
+  20% {
     opacity: 1;
   }
-  40%{
+
+  40% {
     opacity: 0;
   }
-  60%{
+
+  60% {
     opacity: 1;
   }
-  80%{
+
+  80% {
     opacity: 0;
   }
-  100%{
+
+  100% {
     opacity: 1;
   }
 }
 
-#menu{
+#menu {
   height: auto;
   width: 50%;
   background-color: #222;
@@ -213,10 +221,10 @@ a{
   margin-top: 10%;
   text-align: center;
   font-size: 0.8rem;
-  font-family: 'Press Start 2P',sans-serif;
+  font-family: 'Press Start 2P', sans-serif;
 }
 
-#menu div{
+#menu div {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -225,14 +233,16 @@ a{
   margin: 10px;
 }
 
-#difficultyButton{
+#difficultyButton {
   display: flex;
   flex-direction: row;
 }
-#difficultyButton a{
+
+#difficultyButton a {
   width: 25%;
 }
-h1{
+
+h1 {
   padding-top: 50px;
 }
 
@@ -240,14 +250,14 @@ h1{
   width: 30px;
 }
 
-#audioOption{
+#audioOption {
   position: absolute;
   bottom: 0;
   right: 50px;
   cursor: pointer;
 }
 
-#audioIcon{
+#audioIcon {
   width: 80px;
   cursor: pointer;
 }
@@ -316,36 +326,230 @@ h1{
   grid-template-areas: 'overlap';
   text-transform: uppercase;
 }
-.wrapper > div {
-  background-clip: text;  
+
+.wrapper>div {
+  background-clip: text;
   text-align: center;
   -webkit-background-clip: text;
   color: #363833;
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: clamp( 2em, 14vw, 13rem);
+  font-size: clamp(2em, 14vw, 13rem);
   grid-area: overlap;
   letter-spacing: 1px;
   -webkit-text-stroke: 4px transparent;
 }
+
 div.bg {
-  background-image: repeating-linear-gradient( 105deg, 
-    var(--gold) 0% , 
-    var(--dark-shadow) 5%,
-    var(--gold) 12%);
+  background-image: repeating-linear-gradient(105deg,
+      var(--gold) 0%,
+      var(--dark-shadow) 5%,
+      var(--gold) 12%);
   color: transparent;
   filter: drop-shadow(5px 15px 15px black);
   transform: scaleY(1.05);
   transform-origin: top;
   font-family: 'Press Start 2P', sans-serif;
 }
-div.fg{
-  background-image: repeating-linear-gradient( 105deg, 
-    var(--gold) 0% , 
-    var(--dark-shadow) 5%,
-    var(--gold) 12%);
+
+div.fg {
+  background-image: repeating-linear-gradient(105deg,
+      var(--gold) 0%,
+      var(--dark-shadow) 5%,
+      var(--gold) 12%);
   color: transparent;
   filter: drop-shadow(5px 15px 15px black);
   transform: scale(1);
   font-family: 'Press Start 2P', sans-serif;
+}
+
+/* ________________________________________________ */
+/* __________________ SHOP ________________________ */
+/* ________________________________________________ */
+
+#shop {
+  height: 80%;
+  width: 90%;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.item {
+  height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+#blue-coin {
+  width: 80px;
+  height: auto;
+}
+
+#real-heart {
+  width: 80px;
+  height: auto;
+}
+
+#character-blue {
+  height: 300px;
+  width: auto;
+}
+
+#coming{
+  color: #efefef;
+  font-size: 1.7rem;
+  font-family: 'Press Start 2P', sans-serif;
+}
+
+.row-display {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  align-items: center;
+  /* background-color: #222; */
+  /* border: 3px solid gold; */
+  border-radius: 5px;
+  margin: 0 10px;
+  background-image: url(./images/shopBG.png);
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 2;
+  height: 550px;
+  width: 300px;
+}
+
+.sign {
+  margin: 80px auto 0 auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign p {
+  color: #ffb338;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-size: 1rem;
+  /* font-weight: bold; */
+  font-family: 'Press Start 2P', sans-serif;
+  /* margin-top: 20px; */
+}
+
+.sign button {
+  background-color: #332C23;
+  border: 0 solid #E5E7EB;
+  box-sizing: border-box;
+  color: #efefef;
+  display: flex;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  justify-content: center;
+  line-height: 1.75rem;
+  /* margin: 40px 25px; */
+  position: relative;
+  text-align: center;
+  text-decoration: none #000000 solid;
+  text-decoration-thickness: auto;
+  /* width: 25%; */
+  position: relative;
+  cursor: pointer;
+  transform: rotate(-2deg);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.sign button:focus {
+  outline: 0;
+}
+
+.sign button:after {
+  content: '';
+  position: absolute;
+  border: 1px solid #000000;
+  bottom: 4px;
+  left: 4px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+}
+
+.sign button:hover:after {
+  bottom: 2px;
+  left: 2px;
+}
+
+.coin-logo {
+  width: 20px;
+  height: 20px;
+}
+
+.coin-logo-multiplier{
+  width: 60px;
+  height: 60px;
+}
+
+.column-display {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#shop-title {
+  text-align: center;
+  font-family: 'Press Start 2P', sans-serif;
+  color: #efefef;
+  font-size: 2rem;
+}
+
+#return-btn {
+  color: #efefef;
+  font-family: 'Press Start 2P', sans-serif;
+  padding: 20px;
+  text-decoration: none;
+  font-size: 1.7rem;
+  position: relative;
+  cursor: pointer;
+  transform: rotate(-2deg);
+  margin-left: 20px;
+  background-color: #363833;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+
+#bank {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  color: #efefef;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 1.7rem;
+}
+
+#multiplier {
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 5rem;
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  /* Pour la prise en charge des navigateurs WebKit */
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+}
+
+#multiplier-text {
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 1rem;
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  /* Pour la prise en charge des navigateurs WebKit */
+  background-clip: text;
+  color: transparent;
 }
